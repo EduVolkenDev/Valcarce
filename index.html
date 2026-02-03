@@ -6,11 +6,62 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description"
         content="Studios novos e bem localizados — escolha seu studio e agende uma visita rapidinho." />
-    <title>Studios H Valcarce</title>
+    <title>Studios Modernos</title>
+
+    <!-- Se você não usa essas fontes, pode remover para performance -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;700&family=Inter:wght@400;600;700&display=swap"
+        rel="stylesheet">
+
     <style>
+        /* =========================
+       BASE / TOKENS
+       ========================= */
+        @font-face {
+            font-family: "Tenor Sans";
+            src: url("./assets/TenorSans-Regular.ttf") format("truetype");
+            font-weight: 400;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        :root {
+            --bg: #070A12;
+
+            --surface: rgba(255, 255, 255, .06);
+            --surface2: rgba(255, 255, 255, .10);
+            --stroke: rgba(255, 255, 255, .14);
+
+            --text: rgba(255, 255, 255, .92);
+            --muted: rgba(255, 255, 255, .72);
+
+            --accent: #6D5BFF;
+            --accent2: #20E3B2;
+            --accent3: #FF5FD7;
+
+            --shadow: 0 18px 60px rgba(0, 0, 0, .35);
+            --shadow2: 0 10px 30px rgba(0, 0, 0, .28);
+
+            --r-xl: 22px;
+            --r-lg: 18px;
+            --r-md: 14px;
+
+            --max: 1120px;
+
+            --heroOverlayOpacity: .55;
+            --media-fit: cover;
+
+            --bg: #070A12;
+            --surface: rgba(255, 255, 255, .06);
+
+            /* HERO ajustes */
+            --heroCardLift: clamp(14px, 50vh, 300px);
+            --heroH: min(100svh, 890px);
+            --heroMobile: min(90svh, 890px)
+        }
+
         * {
             box-sizing: border-box;
         }
@@ -21,12 +72,24 @@
 
         html,
         body {
-            font-family: "Inter", system-ui, sans-serif;
+            font-family: "Tenor Sans", system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
             width: 100%;
+            max-width: 100%;
+
+        }
+
+        body {
             margin: 0;
-            color: rgba(255, 255, 255, .92);
-            background: #070A12;
+            color: var(--text);
+            background: #5F1E8C;
             min-height: 100dvh;
+        }
+
+        input,
+        button,
+        textarea,
+        select {
+            font-family: inherit;
         }
 
         body::before {
@@ -34,15 +97,47 @@
             position: fixed;
             inset: 0;
             z-index: -1;
-            background: linear-gradient(50deg, rgba(100, 227, 102, .47), rgba(220, 119, 219, .66), rgba(12, 229, 14, .34));
+            background: linear-gradient(50deg, rgba(100, 227, 102, 0.47), rgba(220, 119, 219, 0.66), rgba(12, 229, 14, 0.34));
         }
 
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        a:hover {
+            opacity: .92;
+        }
+
+        img,
+        video,
+        svg,
+        canvas {
+            max-width: 100%;
+            display: block;
+        }
+
+        ::selection {
+            background: rgba(32, 227, 178, .22);
+            color: var(--text);
+        }
+
+        :focus-visible {
+            outline: 2px solid rgba(32, 227, 178, .75);
+            outline-offset: 3px;
+            border-radius: 10px;
+        }
+
+        /* =========================
+       LAYOUT
+       ========================= */
         .section {
             padding: clamp(32px, 6vw, 50px) clamp(16px, 5vw, 28px);
+            background: transparent;
         }
 
         .section>* {
-            max-width: 1120px;
+            max-width: var(--max);
             margin-inline: auto;
         }
 
@@ -54,76 +149,79 @@
         }
 
         h2 {
-            font-size: clamp(28px, 3vw, 50px);
+            font-size: clamp(30px, 3vw, 50px);
             line-height: 1;
             color: rgba(152, 227, 100, 0.91);
             text-shadow: 0 4px 8px black;
             text-align: center;
-            width: 100%;
+            width: 50%;
+            text-align: center;
         }
 
         .section-subtitle {
-            margin: 20px auto 0;
-            color: #fff;
-            font-size: clamp(16px, 4vw, 26px);
-            line-height: 1.5;
+            margin: 25px auto 0 !important;
+            color: rgb(254, 254, 254);
+            font-size: clamp(18px, 4.4vw, 30px);
+            line-height: 1.6;
             text-shadow: 0 0 6px black;
             text-align: center;
         }
 
-        .hero {
-            position: relative;
-            height: min(100svh, 890px);
-            display: grid;
-            grid-template-rows: 1fr auto;
-            align-content: end;
-            padding: 10px;
-            overflow: hidden;
-        }
-
-        .hero-video,
-        .hero-overlay {
+        .hero-video {
             position: absolute;
             inset: 0;
             width: 100%;
             height: 100%;
-        }
-
-        .hero-video {
             object-fit: cover;
             transform: scale(1.02);
+            filter: saturate(1.05) contrast(1.05);
+            z-index: 0;
         }
 
         .hero-overlay {
-            background: linear-gradient(180deg, rgba(7, 10, 18, .25) 0%, rgba(7, 10, 18, .74) 70%, rgba(7, 10, 18, .92) 100%);
-            opacity: .55;
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(900px 560px at 20% 20%, rgba(109, 91, 255, .20), transparent 55%),
+                radial-gradient(900px 560px at 80% 30%, rgba(32, 227, 178, .14), transparent 58%),
+                linear-gradient(180deg, rgba(7, 10, 18, .25) 0%, rgba(7, 10, 18, .74) 70%, rgba(7, 10, 18, .92) 100%);
+            opacity: var(--heroOverlayOpacity);
+            z-index: 1;
         }
 
         .hero-content {
             position: relative;
             z-index: 2;
             width: min(860px, 95%);
-            margin: auto;
             text-align: center;
             padding: clamp(14px, 2.6vw, 22px);
             border-radius: 20px;
             background: rgba(240, 248, 255, .22);
             border: 1px solid rgba(255, 255, 255, .14);
             backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            box-shadow: var(--shadow2);
+            grid-row: 2;
+            justify-self: center;
+            align-self: center;
+            margin-top: 0 !important;
+            margin: auto;
         }
 
         .hero-content h1 {
-            font-size: clamp(28px, 5vw, 52px);
+            font-size: clamp(34px, 5.2vw, 56px);
             line-height: .95;
             margin: 0 0 12px;
             color: rgba(152, 227, 100, 0.91);
+            text-wrap: balance;
             text-shadow: -3px 6px 7px black;
         }
 
         .hero-content p {
-            margin: 0 auto 20px;
+            margin: 0 auto 22px;
+            max-width: 68ch;
             color: rgba(255, 255, 255, .86);
-            font-size: clamp(14px, 1.6vw, 18px);
+            font-size: clamp(15px, 1.6vw, 18px);
             line-height: 1.6;
         }
 
@@ -136,38 +234,84 @@
             font-weight: 700;
             letter-spacing: .06em;
             text-transform: uppercase;
-            color: #fff;
+            color: rgba(255, 255, 255, 0.96);
             background: linear-gradient(89deg, #8C32F97D, #E3C5208A, #8D3AF19C);
-            box-shadow: 0 18px 40px rgba(32, 227, 178, .20);
-            transition: transform .16s ease;
+            box-shadow: 0 18px 40px rgba(32, 227, 178, .20), 0 12px 28px rgba(109, 91, 255, .16);
+            transition: transform .16s ease, filter .16s ease;
+            text-shadow: 0 0 6px rgba(0, 0, 0, .7);
         }
 
         .cta:hover {
             transform: translateY(-2px);
+            filter: brightness(1.02);
         }
 
-        /* Cards */
+        .cta:active {
+            transform: translateY(0) scale(.99);
+        }
+
+        #sobre ul.diferenciais {
+            margin: 50px auto;
+            padding: 0px;
+            list-style: none;
+            display: grid;
+            gap: 12px;
+            place-content: inherit;
+            height: auto;
+            max-width: 100vw;
+            width: 50vw;
+            text-align: center;
+            font-size: 30px;
+        }
+
+        #sobre ul.diferenciais li {
+            padding: 35px 0;
+            background: rgba(149, 88, 222, 0.49);
+            border-radius: var(--r-lg);
+            font-weight: 600;
+            color: rgba(255, 255, 255, .88);
+            border: 2px inset #ac1;
+            min-height: auto;
+            box-shadow: 10px 0 20px 10px inset #e78cd963, -10px 0px 20px 10px inset #e78cd963;
+            width: auto;
+            height: auto;
+        }
+
+        /* =========================
+       CARDS (responsivo sem gambiarra)
+       ========================= */
         .cards {
             margin-top: 26px;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
             gap: 16px;
+            align-items: stretch;
         }
 
         .card {
+            min-width: 0;
             padding: 0;
-            border-radius: 22px;
+            border-radius: var(--r-xl);
             background: rgba(141, 48, 183, .38);
             border: 1px solid rgba(255, 255, 255, .14);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, .28);
+            box-shadow: var(--shadow2);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            transition: transform .18s ease, border-color .18s ease, background .18s ease;
             overflow: hidden;
+            margin: 10px auto !important;
         }
 
         .card:hover {
             transform: translateY(-4px);
+            border-color: rgba(32, 227, 178, .28);
+            background: rgba(255, 255, 255, .075);
         }
 
         .card-media {
+            border-radius: 22px 22px 0 0;
+            border: none;
+            overflow: hidden;
             aspect-ratio: 13 / 11;
             background: rgba(0, 0, 0, .18);
         }
@@ -175,8 +319,12 @@
         .card-media img {
             width: 100%;
             height: 100%;
-            object-fit: cover;
-            padding: 16px;
+            object-fit: var(--media-fit);
+            object-position: center;
+            display: block;
+            padding: 20px;
+            border-top-left-radius: 22px;
+            border-top-right-radius: 22px;
         }
 
         .card-body {
@@ -185,7 +333,7 @@
 
         .card h3 {
             font-size: 20px;
-            margin: 10px 0;
+            margin: 10px 0 10px;
             text-shadow: -5px 5px 8px black;
         }
 
@@ -195,67 +343,69 @@
             line-height: 1.55;
         }
 
-        .btn-row {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin-top: 12px;
-            justify-content: center;
+        .card p strong {
+            color: rgba(255, 255, 255, .94);
+            text-shadow: -5px 4px 7px black;
         }
 
-        .btn {
+        /* Botões: flex de verdade */
+        .btn-row {
+            display: inline-block;
+            margin-top: 10px;
+        }
+
+        .btn,
+        .btn-last-row {
             cursor: pointer;
             border-radius: 999px;
-            padding: 12px 16px;
-            border: 2px outset rgba(48, 227, 101, .55);
+            padding: 14px 18px;
+            border: 2px outset rgba(48, 227, 101, 0.55) !important;
             font-weight: 700;
-            background: linear-gradient(30deg, #8C32F957, #E3A92078);
-            color: #fff;
-            transition: transform .16s ease;
+            letter-spacing: .01em;
+            transition: transform .16s ease, background .16s ease, border-color .16s ease, filter .16s ease;
+            background: linear-gradient(30deg, #8C32F957, #E3A92078, #8C32F957);
+            color: rgba(255, 255, 255, .92);
+            box-shadow: 0px 0px 7px 2px inset rgba(21, 17, 25, 0.5);
+            width: 220px;
         }
 
-        .btn:hover {
-            transform: translateY(-2px);
+        .btn:hover,
+        .btn-last-row:hover {
+            filter: brightness(1.05);
+            background: linear-gradient(30deg, #bd97ec7d, #eadb838a, #b78ee99c);
+        }
+
+        .btn:active,
+        .btn-last-row:active {
+            transform: translateY(0) scale(.99);
         }
 
         .btn.primary {
-            background: linear-gradient(30deg, #8C32F957, #E3C5208A);
+            background: linear-gradient(30deg, #8C32F957, #E3A92078, #8C32F957);
+            border: 2px outset rgba(48, 227, 101, 0.55);
         }
 
-        /* Diferenciais */
-        #sobre ul.diferenciais {
-            margin: 40px auto;
-            padding: 0;
-            list-style: none;
-            display: grid;
-            gap: 12px;
-            max-width: 100vw;
+        .btn.primary:hover {
+            filter: brightness(1.05);
+            background: linear-gradient(30deg, #bd97ec7d, #eadb838a, #b78ee99c);
         }
 
-        #sobre ul.diferenciais li {
-            padding: 24px;
-            background: rgba(149, 88, 222, .49);
-            border-radius: 18px;
-            font-weight: 600;
-            color: rgba(255, 255, 255, .88);
-            border: 2px inset #ac1;
-            text-align: center;
-        }
-
-        /* Como funciona */
+        /* “Como funciona” - visual + sem quebrar responsivo */
         .section[aria-label="Como funciona"] .card {
             background: rgba(141, 48, 183, .55);
-            padding: 20px;
-            margin: 10px;
-            text-align: center;
+            padding: 15px 15px;
+            margin: 30px 5px;
+            max-width: 100%;
+            display: inline-grid;
+            width: 350px;
+            height: auto;
         }
 
         .section[aria-label="Como funciona"] .card h3 {
-            color: rgba(152, 227, 100, 0.91);
             display: flex;
             align-items: center;
-            justify-content: center;
             gap: 10px;
+            color: rgba(152, 227, 100, 0.91);
         }
 
         .section[aria-label="Como funciona"] .card h3::before {
@@ -264,36 +414,196 @@
             height: 7px;
             border-radius: 999px;
             background: linear-gradient(95deg, #FFCF5F, #E32020);
+            box-shadow: 0 0 14px rgba(95, 240, 255, 0.35);
+            flex: 0 0 auto;
         }
 
         .btn-last {
-            margin-top: 20px;
-            text-align: center;
+            margin-top: 14px;
+            display: flex;
+            justify-content: center;
         }
 
-        .btn-last-row {
-            cursor: pointer;
-            border-radius: 999px;
+        .section[aria-label="Como funciona"] .btn-last-row {
+            width: min(520px, 100%);
             padding: 14px 18px;
-            border: 2px outset rgba(48, 227, 101, .55);
-            font-weight: 700;
+            font-size: 15px;
             background: linear-gradient(89deg, #8C32F97D, #E3C5208A, #8D3AF19C);
-            color: #fff;
-            max-width: 100%;
         }
 
-        /* Footer */
+
+        /* =========================
+       MODAL (corrige o “display:none” que travava tudo)
+       ========================= */
+        /* ===== MODAL BASE ===== */
+        /* ===== MODAL BASE ===== */
+        .modal,
+        .sub-modal {
+            position: fixed;
+            inset: 0;
+            display: grid;
+            place-items: center;
+            padding: 18px;
+            background: rgba(0, 0, 0, .6);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+        }
+
+        /* escondido */
+        .modal[aria-hidden="true"],
+        .sub-modal[aria-hidden="true"] {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        /* visível */
+        .modal[aria-hidden="false"],
+        .sub-modal[aria-hidden="false"] {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* z-index */
+        .modal {
+            z-index: 9999;
+        }
+
+        .sub-modal {
+            z-index: 10000;
+        }
+
+        .sub-modal strong {
+            border-bottom: 1px solid #ffffff4f;
+            padding-bottom: 20px;
+        }
+
+        /* painel */
+        .modal-panel,
+        .sub-modal-panel {
+            inset: 0;
+            display: grid;
+            place-items: center;
+            padding: 30px;
+            background: rgba(0, 0, 0, 0.31);
+            -webkit-backdrop-filter: blur(8px);
+            width: 30%;
+            height: auto;
+            max-width: 100%;
+            border-radius: 15px;
+            text-align: center;
+            border: 4px outset #120808;
+        }
+
+        .sub-modal {
+            position: fixed;
+            inset: 0;
+            z-index: 10000;
+            /* acima do modal principal */
+            display: grid;
+            place-items: center;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.75);
+            backdrop-filter: blur(10px);
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity .25s ease, visibility .25s ease;
+        }
+
+        .sub-modal[aria-hidden="false"] {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .sub-modal-panel {
+            max-width: 100%;
+            max-height: 100%;
+            overflow-y: auto;
+            background: rgba(20, 20, 32, 0.95);
+            border-radius: 18px;
+            padding: 0px;
+            position: relative;
+        }
+
+        .sub-modal-images {
+            display: grid;
+            gap: 40px;
+            justify-items: center;
+            align-items: center;
+            grid-template-columns: 4fr 4fr;
+            width: auto;
+        }
+
+        .sub-modal-images img {
+            width: 200px;
+            height: auto;
+            object-fit: cover;
+            border-radius: 14px;
+            border: 1px solid rgba(255, 255, 255, .14);
+            box-shadow: 0 6px 18px rgba(0, 0, 0, .35);
+            transition: transform .25s ease, box-shadow .25s ease;
+        }
+
+        .sub-modal-images img:hover {
+            transform: scale(1.1);
+            box-shadow: 0 12px 28px rgba(32, 227, 178, .6);
+        }
+
+
+        /* botão fechar */
+        .modal-close {
+            cursor: pointer;
+            border: 2px outset black;
+            border-radius: 10px;
+            width: 45px;
+            height: 35px;
+            background: rgba(199, 101, 208, 0.68);
+            color: white;
+            position: relative;
+            display: block;
+        }
+
+        /* ===== GRID DAS ÁREAS ===== */
+        .areas-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 16px;
+            margin-top: 20px;
+        }
+
+        .areas-grid img {
+            width: 100%;
+            height: 140px;
+            object-fit: cover;
+            border-radius: 14px;
+            border: 1px solid rgba(255, 255, 255, .14);
+            transition: transform .25s ease;
+        }
+
+        .areas-grid img:hover {
+            transform: scale(1.08);
+        }
+
+        /* =========================
+       FOOTER (HTML limpo + responsivo)
+       ========================= */
         footer {
             text-align: center;
             font-size: 13px;
-            padding: 24px 16px;
+            padding: 18px 14px;
             background: rgba(0, 0, 0, .16);
             border-top: 1px solid rgba(255, 255, 255, .10);
+            border-top-left-radius: 15px;
+            display: flex;
+            height: auto;
+            flex-direction: column;
+            border-top-right-radius: 15px;
             margin-top: 50px;
         }
 
         footer p {
             margin: 8px auto;
+            max-width: var(--max);
             color: rgba(255, 255, 255, .78);
             line-height: 1.6;
         }
@@ -304,134 +614,10 @@
 
         .footer-link {
             text-decoration: underline;
+            text-underline-offset: 2px;
         }
 
-        /* Modal */
-        .modal,
-        .sub-modal {
-            position: fixed;
-            inset: 0;
-            display: grid;
-            place-items: center;
-            padding: 16px;
-            background: rgba(0, 0, 0, .6);
-            backdrop-filter: blur(8px);
-            z-index: 9999;
-        }
 
-        .modal[aria-hidden="true"],
-        .sub-modal[aria-hidden="true"] {
-            opacity: 0;
-            visibility: hidden;
-            pointer-events: none;
-        }
-
-        .modal[aria-hidden="false"],
-        .sub-modal[aria-hidden="false"] {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        .sub-modal {
-            z-index: 10000;
-        }
-
-        .modal-panel,
-        .sub-modal-panel {
-            background: rgba(20, 20, 32, .98);
-            border-radius: 18px;
-            padding: 24px;
-            max-width: 90%;
-            max-height: 90vh;
-            overflow-y: auto;
-            text-align: center;
-            border: 1px solid rgba(255, 255, 255, .10);
-        }
-
-        .modal-close {
-            cursor: pointer;
-            border: 2px outset black;
-            border-radius: 10px;
-            width: 40px;
-            height: 36px;
-            background: rgba(199, 101, 208, .68);
-            color: white;
-            float: right;
-            font-size: 18px;
-        }
-
-        .modal-panel h3 {
-            clear: both;
-            padding-top: 10px;
-        }
-
-        /* Areas Comuns Grid - RESPONSIVO */
-        .sub-modal-images {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 12px;
-            margin-top: 16px;
-        }
-
-        .sub-modal-images>div {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .sub-modal-images img {
-            width: 100%;
-            max-width: 140px;
-            height: 100px;
-            object-fit: cover;
-            border-radius: 12px;
-            border: 1px solid rgba(255, 255, 255, .14);
-        }
-
-        .sub-modal-images span {
-            margin-top: 6px;
-            font-size: 12px;
-            color: rgba(255, 255, 255, .85);
-        }
-
-        .sub-modal-panel h3 {
-            margin-bottom: 16px;
-        }
-
-        /* Mobile extra small */
-        @media (max-width: 480px) {
-            .hero-content {
-                padding: 16px;
-            }
-
-            .hero-content h1 {
-                font-size: 26px;
-            }
-
-            .cards {
-                grid-template-columns: 1fr;
-            }
-
-            #sobre ul.diferenciais li {
-                font-size: 16px;
-                padding: 16px;
-            }
-
-            .sub-modal-images {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 8px;
-            }
-
-            .sub-modal-images img {
-                max-width: 100%;
-                height: 90px;
-            }
-
-            .modal-panel,
-            .sub-modal-panel {
-                padding: 16px;
-            }
-        }
 
         @media (prefers-reduced-motion: reduce) {
             html {
@@ -440,12 +626,113 @@
 
             .cta,
             .btn,
+            .btn-last-row,
             .card {
                 transition: none;
             }
 
             .hero-video {
                 display: none;
+            }
+        }
+
+        /* 3) BTN-LAST: força ocupar a linha inteira do grid e não esticar */
+        .section[aria-label="Como funciona"] .cards {
+            align-items: start;
+            /* evita o item “esticar” na altura e ficar “gordo” */
+        }
+
+        .section[aria-label="Como funciona"] .btn-last {
+            grid-column: 1 / -1;
+            /* ocupa a linha inteira */
+            justify-content: center;
+            align-items: start;
+            height: auto;
+            margin-top: 14px;
+        }
+
+        .hero {
+            position: relative;
+            height: var(--heroH);
+            display: grid;
+            grid-template-rows: 1fr auto;
+            align-content: end;
+            padding: 10px;
+            overflow: hidden;
+        }
+
+
+        .hero-video,
+        .hero-overlay {
+            height: 100% !important;
+            /* cobre 100% do hero */
+        }
+
+        @media (max-width: 980px) {
+            .hero {
+                height: var(--heroMobile);
+                min-height: var(--heroMobile);
+            }
+
+            .hero-content {
+                text-align: center;
+                width: min(860px, 95%);
+                margin: auto;
+            }
+
+            .hero-content h1 {
+                font-size: 30px !important;
+                line-height: 1.05 !important;
+            }
+
+            .hero-video {
+                height: 75%;
+            }
+
+            .hero-overlay {
+                height: 76%;
+            }
+
+            h2 {
+                max-width: 100vw !important;
+                width: 330px;
+                margin: auto;
+                display: grid;
+                padding-right: 22px;
+            }
+
+            #sobre ul.diferenciais {
+                margin: 42px !important;
+                max-width: 100vw !important;
+                width: auto !important;
+                font-size: 20px !important;
+                padding: 0px !important;
+                height: auto !important;
+                margin-bottom: 0px !important;
+            }
+
+            .section-subtitle {
+                padding: 5px;
+                margin: 15px auto !important;
+            }
+
+            .btn-row {
+                display: grid;
+                gap: 10px;
+                margin: 0 auto;
+                justify-content: center;
+            }
+
+            .card p {
+                text-align: center;
+            }
+
+            h3::before {
+                display: none;
+            }
+
+            .card h3 {
+                text-align: center;
             }
         }
     </style>
@@ -456,61 +743,84 @@
         <video class="hero-video" autoplay muted loop playsinline preload="metadata">
             <source src="./assets/frame2-studio.mp4" type="video/mp4" />
         </video>
+
         <div class="hero-overlay" aria-hidden="true"></div>
+
         <div class="hero-content">
-            <h1>COMPACTO NO TAMANHO, GIGANTE NA LOCALIZACAO</h1>
-            <p>Studios funcionais na rota das universidades, com mobilidade total. Praticidade e independencia para quem
-                vive a cidade.</p>
-            <a href="https://caner.aggilizador.com.br/rent" target="_blank"><button class="cta" type="button">BORA SE
+            <h1>COMPACTO NO TAMANHO, GIGANTE NA LOCALIZAÇÃO</h1>
+            <p>
+                Studios funcionais na rota das universidades, com mobilidade total.
+                Praticidade e independência para quem vive a cidade.
+            </p>
+            <a href="https://caner.aggilizador.com.br/rent" target="_blank" rel="noopener noreferrer">
+                <button class="cta" type="button" aria-label="Agendar visita e ir para contato">BORA SE
                     CADASTRAR</button></a>
         </div>
     </section>
-
-    <section class="section" id="sobre">
+    <section class="section" id="sobre" aria-label="Sobre o empreendimento">
         <h2>STUDIOS PENSADOS PARA SUA ROTINA URBANA</h2>
-        <p class="section-subtitle">Metro na porta, universidades a poucos passos e tudo que voce precisa para estudar,
-            trabalhar e viver bem.</p>
+        <p class="section-subtitle">
+            Metrô na porta, universidades a poucos passos e tudo que você precisa para estudar, trabalhar e viver bem.
+        </p>
         <ul class="diferenciais">
-            <li><strong>Mobilidade:</strong> Transporte rapido com o metro na porta.</li>
-            <li><strong>Praticidade:</strong> Studios de 28 a 32 m² ideais para ate 2 pessoas.</li>
-            <li><strong>Vida urbana:</strong> Proximo a universidades, bares, cafes e lazer.</li>
-            <li><strong>Independencia:</strong> Um espaco so seu, compacto e funcional.</li>
+            <li><strong>Mobilidade:</strong> Transporte rápido com o metrô na porta.</li>
+            <li><strong>Praticidade:</strong> Studios de 28 a 32 m² ideais para até 2 pessoas.</li>
+            <li><strong>Vida urbana:</strong> Próximo a universidades, bares, cafés e lazer.</li>
+            <li><strong>Independência:</strong> Um espaço só seu, compacto e funcional.</li>
+            <li><strong>Qualidade de vida é prioridade:</strong> Morar bem também é viver bem.</li>
         </ul>
     </section>
 
-    <section class="section" id="opcoes">
-        <h2>AGIL QUE NEM SP</h2>
-        <p class="section-subtitle">Tem que ser facil: voce ve as opcoes, se cadastra e depois de aprovado agenda a
+    <section class="section" id="opcoes" aria-label="Opções">
+        <h2>ÁGIL QUE NEM SP</h2>
+        <p class="section-subtitle">Tem que ser fácil: você vê as opções, se cadastra e depois de aprovado agenda a
             visita rapidinho.</p>
-        <div class="cards">
-            <article class="card">
-                <div class="card-media"><img src="./assets/semsacadaofi.png" alt="Studio com sacada" loading="lazy" />
+
+        <div class="cards" role="list">
+            <article class="card" role="listitem">
+                <div class="card-media">
+                    <img src="./assets/semsacadaofi.png" alt="Studio com sacada" loading="lazy" />
                 </div>
+
                 <div class="card-body">
                     <h3>32m² COM SACADA</h3>
-                    <p>Espaco extra pro cafe da tarde, pras plantinhas ou so pra curtir o fim do dia.</p>
-                    <p><strong>A partir de R$ 2.100/mes</strong></p>
+                    <p>Espaço extra pro café da tarde, pras plantinhas ou só pra curtir o fim do dia.</p>
+                    <p><strong>A partir de R$ 2.100/mês</strong></p>
+
                     <div class="btn-row">
-                        <a href="https://caner.aggilizador.com.br/rent" target="_blank"><button class="btn primary"
-                                type="button">ENTRAR NA LISTA</button></a>
-                        <button class="btn" type="button" data-action="details" data-title="32m² com sacada"
-                            data-desc="Espaco extra pro cafe da tarde."
-                            data-price="A partir de R$ 2.100/mes">DETALHES</button>
+                        <a href="https://caner.aggilizador.com.br/rent" target="_blank" rel="noopener noreferrer">
+                            <button class="btn primary" type="button" data-action="formulário">
+                                ENTRAR NA LISTA
+                            </button></a>
+                        <button class="btn" type="button" data-action="details" data-title="20m² com sacada"
+                            data-desc="Um respiro a mais pro café, planta ou só pra curtir o fim do dia."
+                            data-price="A partir de R$ 2.100/mês">
+                            DETALHES DO AP
+                        </button>
                     </div>
                 </div>
             </article>
-            <article class="card">
-                <div class="card-media"><img src="./assets/semsacadaofi.png" alt="Studio sem sacada" loading="lazy" />
+
+            <article class="card" role="listitem">
+                <div class="card-media">
+                    <img src="./assets/semsacadaofi.png" alt="Studio sem sacada" loading="lazy" />
                 </div>
+
                 <div class="card-body">
                     <h3>28m² SEM SACADA</h3>
-                    <p>Compacto, pratico e direto ao ponto — perfeito pra rotina corrida.</p>
-                    <p><strong>A partir de R$ 1.900/mes</strong></p>
+                    <p>Compacto, prático e direto ao ponto — perfeito pra rotina corrida.</p>
+                    <p><strong>A partir de R$ 1.900/mês</strong></p>
+
                     <div class="btn-row">
-                        <a href="https://caner.aggilizador.com.br/rent" target="_blank"><button class="btn primary"
-                                type="button">ENTRAR NA LISTA</button></a>
-                        <button class="btn" type="button" data-action="details" data-title="28m² sem sacada"
-                            data-desc="Compacto e pratico." data-price="A partir de R$ 1.900/mes">DETALHES</button>
+                        <a href="https://caner.aggilizador.com.br/rent" target="_blank" rel="noopener noreferrer">
+                            <button class="btn primary" type="button" data-action="formulário">
+                                ENTRAR NA LISTA
+                            </button></a>
+                        <button class="btn" type="button" data-action="details" data-title="20m² sem sacada"
+                            data-desc="Compacto, prático e direto ao ponto — perfeito pra rotina corrida."
+                            data-price="A partir de R$ 1.900/mês">
+                            DETALHES DO AP
+                        </button>
                     </div>
                 </div>
             </article>
@@ -519,104 +829,234 @@
 
     <section class="section" aria-label="Como funciona">
         <h2>COMO FUNCIONA</h2>
-        <p class="section-subtitle">Rapido e simples.</p>
-        <div class="cards">
-            <article class="card">
-                <h3>1) VOCE SE CADASTRA</h3>
-                <p>Preenche o formulario pra gente ver o que se encaixa melhor pra voce.</p>
+        <p class="section-subtitle">Rápido e simples.</p>
+
+        <div class="last-cards" role="list">
+            <article class="card" role="listitem">
+                <h3>1) VOCÊ SE CADASTRA</h3>
+                <p>Preenche o formulário pra gente ver o que se encaixa melhor pra você.</p>
             </article>
-            <article class="card">
+            <article class="card" role="listitem">
                 <h3>2) A GENTE TE GUIA</h3>
-                <p>Te mostramos as opcoes certinhas com valores e disponibilidade.</p>
+                <p>Te mostramos as opções certinhas com valores e disponibilidade.</p>
             </article>
-            <article class="card">
-                <h3>3) VOCE VISITA E DECIDE</h3>
-                <p>Visita, curte o espaco e escolhe o seu lar.</p>
+            <article class="card" role="listitem">
+                <h3>3) VOCÊ VISITA E DECIDE</h3>
+                <p>Visita, curte o espaço e escolhe o seu lar.</p>
             </article>
         </div>
-        <div class="btn-last"><a href="https://caner.aggilizador.com.br/rent" target="_blank"><button
-                    class="btn-last-row" type="button">BORA SE CADASTRAR</button></a></div>
     </section>
 
-    <footer id="contato">
-        <p><strong>Ficou com duvida?</strong> Fale com o ChatBot (ele te guia no caminho certo).</p>
-        <p>WhatsApp: <a class="footer-link" href="https://wa.me/5511994603024" target="_blank">1199460-3024</a></p>
-        <p>E-mail: <a class="footer-link" href="mailto:contato@valcarce.com.br">contato@valcarce.com.br</a></p>
-        <p style="margin-top:12px; font-size:11px;">VALORES E IMAGENS SAO ILUSTRATIVOS.</p>
+    <section class="section" id="cta-final" aria-label="Chamada final">
+        <h2>GARANTA SEU STUDIO E VIVA ONDE TUDO ACONTECE</h2>
+        <p class="section-subtitle">Estude, trabalhe e aproveite a vida urbana com mobilidade total.</p>
+        <div class="btn-last">
+            <a href="https://caner.aggilizador.com.br/rent" target="_blank" rel="noopener noreferrer">
+                <button class="btn-last-row" type="button" data-action="formulário">BORA SE CADASTRAR</button></a>
+        </div>
+    </section>
+
+    <footer id="contato" aria-label="Contato">
+        <p><strong>Ficou com dúvida?</strong> Fale com o ChatBot (ele te guia no caminho certo).</p>
+        <p>Se não resolver por aqui, estamos disponíveis no WhatsApp ou por e-mail:</p>
+        <p><a class="footer-link" href="https://wa.me/5511994603024" target="_blank" rel="noopener">CHAMAR NO
+                WHATSAPP</a></p>
+        <p>E-mail: <a class="footer-link" href="mailto:contato@valcarce.com.br">MANDE UM EMAIL COM SUAS DÚVIDAS</a>
+        </p>
+        <p style="margin-top:12px;">VALORES E IMAGENS SAO ILUSTRATIVOS E PODEM MUDAR CONFORME DISPONIBILIDADE.</p>
     </footer>
 
-    <!-- Modal Principal -->
+    <!-- Modal (Detalhes) -->
+    <!-- Modal principal -->
     <div class="modal" id="detailsModal" aria-hidden="true">
         <div class="modal-panel">
             <button class="modal-close" data-close-modal>✕</button>
-            <h3 id="modalTitle">DETALHES</h3>
-            <p id="modalDesc"></p>
-            <p><strong id="modalPrice"></strong></p>
+            <div class="modal-head">
+                <h3 id="modalTitle">DETALHES DO AP</h3>
+
+            </div>
+
+            <p>STUDIOS FUNCIONAIS PENSADOS PRA VIDA URBANA.</p>
+            <p><strong>A PARTIR DE R$ 1.900/mês</strong></p>
+
             <div class="btn-row">
-                <button class="btn secondary" type="button" id="openSubModal">Areas Comuns</button>
-                <a href="https://caner.aggilizador.com.br/rent" target="_blank"><button class="btn primary">Quero
-                        agendar</button></a>
+                <div style="text-align:center; margin:16px 0;">
+                    <button class="btn secondary" type="button" id="openSubModal">
+                        Áreas Comuns
+                    </button>
+                </div>
+                <a href="https://caner.aggilizador.com.br/rent" target="_blank">
+                    <button class="btn primary">Quero agendar</button>
+                </a>
                 <button class="btn" data-close-modal>Fechar</button>
             </div>
         </div>
     </div>
 
-    <!-- Sub-modal Areas Comuns -->
+
+    <!-- Botão para abrir o sub-modal -->
+
+
+    <!-- Sub-modal para Áreas Comuns -->
     <div class="sub-modal" id="subModal" aria-hidden="true">
         <div class="sub-modal-panel">
             <button class="modal-close" type="button" id="closeSubModal">✕</button>
-            <h3>AREAS COMUNS</h3>
+            <h3 style="text-align:center; margin-bottom:16px;">Áreas Comuns</h3>
             <div class="sub-modal-images">
-                <div><img src="./assets/academia.jpg" alt="Academia"><span>Academia</span></div>
-                <div><img src="./assets/coworking.jpg" alt="Coworking"><span>Coworking</span></div>
-                <div><img src="./assets/lounge.jpg" alt="Lounge"><span>Lounge</span></div>
-                <div><img src="./assets/salaodejogos.jpg" alt="Sala de jogos"><span>Sala de jogos</span></div>
-                <div><img src="./assets/lavanderia.jpg" alt="Lavanderia"><span>Lavanderia</span></div>
-                <div><img src="./assets/minimercado.jpg" alt="Mini Mercado"><span>Mini Mercado</span></div>
-                <div><img src="./assets/bicicletario.jpg" alt="Bicicletario"><span>Bicicletario</span></div>
+                <div class="Academia">
+                    <img src="./assets/academia.jpg" alt="Academia"><span>Academia</span>
+                </div>
+                <div class="academia">
+                    <img src="./assets/coworking.jpg" alt="Coworking"><span>Co-working</span>
+                </div>
+                <div class="lounge">
+                    <img src="./assets/lounge.jpg" alt="Lounge"><span>Lounge</span>
+                </div>
+                <div class="Sala-de-jogos">
+                    <img src="./assets/salaodejogos.jpg" alt="Sala de jogos"><span>Sala de jogos </span>
+                </div>
+                <div class="lavanderia">
+                    <img src="./assets/lavanderia.jpg" alt="Lavanderia OMO"><span>Lavanderia OMO</span>
+                </div>
+                <div class="mini-mercado">
+                    <img src="./assets/minimercado.jpg" alt="Mini mercado"><span>Mini Mercado</span>
+                </div>
+                <div class="bicicletario">
+                    <img src="./assets/bicicletario.jpg" alt="Bicicletário"><span>Bicicletário</span>
+                </div>
             </div>
         </div>
     </div>
 
+
     <script>
-        (function () {
-            var modal = document.getElementById('detailsModal');
-            var subModal = document.getElementById('subModal');
-            var modalTitle = document.getElementById('modalTitle');
-            var modalDesc = document.getElementById('modalDesc');
-            var modalPrice = document.getElementById('modalPrice');
-            var openSubModalBtn = document.getElementById('openSubModal');
-            var closeSubModalBtn = document.getElementById('closeSubModal');
+        (() => {
+            // ===== CTA: rolar até contato =====
+            document.querySelector(".cta")?.addEventListener("click", () => {
+                document.getElementById("contato")?.scrollIntoView({ behavior: "smooth" });
+            });
 
-            function openModal(data) {
-                modalTitle.textContent = data.title || 'Detalhes';
-                modalDesc.textContent = data.desc || '';
-                modalPrice.textContent = data.price || '';
-                modal.setAttribute('aria-hidden', 'false');
-            }
-            function closeModal() { modal.setAttribute('aria-hidden', 'true'); }
-            function openSubModal() { subModal.setAttribute('aria-hidden', 'false'); }
-            function closeSubModal() { subModal.setAttribute('aria-hidden', 'true'); }
+            // ===== Mobile Menu =====
+            const btn = document.getElementById("menuBtn");
+            const menu = document.getElementById("mobileMenu");
 
-            document.querySelectorAll('[data-action="details"]').forEach(function (el) {
-                el.addEventListener('click', function () {
-                    openModal({ title: this.getAttribute('data-title'), desc: this.getAttribute('data-desc'), price: this.getAttribute('data-price') });
+            const openMenu = () => {
+                if (!btn || !menu) return;
+                menu.setAttribute("aria-hidden", "false");
+                btn.setAttribute("aria-expanded", "true");
+                btn.setAttribute("aria-label", "Fechar menu");
+            };
+
+            const closeMenu = () => {
+                if (!btn || !menu) return;
+                menu.setAttribute("aria-hidden", "true");
+                btn.setAttribute("aria-expanded", "false");
+                btn.setAttribute("aria-label", "Abrir menu");
+            };
+
+            btn?.addEventListener("click", () => {
+                const isOpen = menu?.getAttribute("aria-hidden") === "false";
+                isOpen ? closeMenu() : openMenu();
+            });
+
+            menu?.addEventListener("click", (e) => {
+                const target = e.target;
+                const clickedLink = target?.matches?.("[data-close]");
+                const clickedBackdrop = target === menu;
+                if (clickedBackdrop || clickedLink) closeMenu();
+            });
+
+            // ===== WhatsApp action =====
+            const WHATS_NUMBER = "5511941148374";
+            const openWhats = (msg) => {
+                const url = "https://wa.me/" + WHATS_NUMBER + "?text=" + encodeURIComponent(msg);
+                window.open(url, "_blank", "noopener");
+            };
+
+            // ===== Modal Principal =====
+            const modal = document.getElementById("detailsModal");
+            const modalDesc = document.getElementById("modalDesc");
+            const modalPrice = document.getElementById("modalPrice");
+            const modalTitle = document.getElementById("modalTitle");
+            const modalWhatsBtn = document.getElementById("modalWhatsBtn");
+            let lastFocus = null;
+            let modalMsg = "Oi! Quero agendar uma visita. 😊";
+
+            const openModal = ({ title, desc, price }) => {
+                if (!modal) return;
+                lastFocus = document.activeElement;
+
+                if (modalTitle) modalTitle.textContent = title || "Detalhes";
+                if (modalDesc) modalDesc.textContent = desc || "";
+                if (modalPrice) modalPrice.textContent = price || "";
+
+                modal.setAttribute("aria-hidden", "false");
+                modal.querySelector(".modal-panel")?.focus?.();
+            };
+
+            const closeModal = () => {
+                if (!modal) return;
+                modal.setAttribute("aria-hidden", "true");
+                lastFocus?.focus?.();
+            };
+
+            document.addEventListener("keydown", (e) => {
+                if (e.key === "Escape") {
+                    closeMenu();
+                    closeModal();
+                    closeSubModal();
+                }
+            });
+
+            document.querySelectorAll("[data-action='whats']").forEach((el) => {
+                el.addEventListener("click", () => {
+                    const msg = el.getAttribute("data-msg") || "Oi! Quero agendar uma visita. 😊";
+                    openWhats(msg);
                 });
             });
-            document.querySelectorAll('[data-close-modal]').forEach(function (el) {
-                el.addEventListener('click', closeModal);
+
+            document.querySelectorAll("[data-action='details']").forEach((el) => {
+                el.addEventListener("click", () => {
+                    openModal({
+                        title: el.getAttribute("data-title"),
+                        desc: el.getAttribute("data-desc"),
+                        price: el.getAttribute("data-price"),
+                    });
+                });
             });
-            openSubModalBtn && openSubModalBtn.addEventListener('click', openSubModal);
-            closeSubModalBtn && closeSubModalBtn.addEventListener('click', closeSubModal);
-            document.addEventListener('keydown', function (e) {
-                if (e.key === 'Escape') { closeModal(); closeSubModal(); }
-            });
-            subModal && subModal.addEventListener('click', function (e) {
-                if (e.target === subModal) closeSubModal();
+
+            modalWhatsBtn?.addEventListener("click", () => openWhats(modalMsg));
+
+            // ===== Sub-modal Áreas Comuns =====
+            // Abrir/fechar sub-modal
+            // Seleção segura de elementos
+            const openSubModalBtn = document.getElementById('openSubModal');
+            const subModal = document.getElementById('subModal');
+            const closeSubModalBtn = document.getElementById('closeSubModal');
+
+            if (openSubModalBtn && subModal && closeSubModalBtn) {
+                openSubModalBtn.addEventListener('click', () => {
+                    subModal.setAttribute('aria-hidden', 'false');
+                });
+
+                closeSubModalBtn.addEventListener('click', () => {
+                    subModal.setAttribute('aria-hidden', 'true');
+                });
+            }
+
+
+
+            // ===== Botões de fechar modal principal =====
+            document.querySelectorAll('[data-close-modal]').forEach(btn => {
+                btn.addEventListener('click', closeModal);
             });
         })();
     </script>
-    <script src="./assets/volynx-studio-bot.js"></script>
+
+    <script src="./assets/bot_kb.js?v=3"></script>
+    <script src="./assets/bot_engine.js?v=3"></script>
+    <script src="./assets/volynx-studio-bot.js?v=3"></script>
+
 </body>
 
 </html>
