@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Studios Modernos</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;700&family=Inter:wght@400;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style2.css">
+
+
+</head>
+
+<body>
+    <header class="navbar">
+        <div class="logo">Studios</div>
+        <nav>
+            <a href="#opcoes">Opções</a>
+            <a href="#contato">Contato</a>
+        </nav>
+    </header>
+
+    <section class="hero" aria-label="Hero">
+        <video class="hero-video" autoplay muted loop playsinline>
+            <source src="./assets/frame2-studio.mp4" type="video/mp4" />
+        </video>
+        <div class="hero-overlay"></div>
+
+        <div class="hero-content">
+            <h1>Seu apê no seu ritmo.</h1>
+            <p>
+                Studios novos, bem localizados, com ou sem sacada — do tamanho da sua necessidade.
+                Bora visitar e ver qual combina com você?
+            </p>
+            <button class="cta" type="button">BORA AGENDAR</button>
+        </div>
+    </section>
+
+    <section class="section" id="opcoes">
+        <h2>Escolhe o seu studio</h2>
+        <p class="section-subtitle">Sem drama: você vê as opções, tira dúvidas e agenda a visita rapidinho.</p>
+
+        <div class="cards">
+            <article class="card">
+                <img src="https://via.placeholder.com/400x200" alt="Studio com sacada" />
+                <h3>20m² com sacada</h3>
+                <p>Um respiro a mais pro café, planta ou só pra curtir o fim do dia.</p>
+                <p><strong>A partir de R$ 2.100/mês</strong></p>
+                <div class="btn-row">
+                    <button class="btn primary" type="button">Ver disponibilidade</button>
+                    <button class="btn" type="button">Detalhes</button>
+                </div>
+            </article>
+
+            <article class="card">
+                <img src="https://via.placeholder.com/400x200" alt="Studio sem sacada" />
+                <h3>20m² sem sacada</h3>
+                <p>Compacto, prático e direto ao ponto — perfeito pra rotina corrida.</p>
+                <p><strong>A partir de R$ 1.900/mês</strong></p>
+                <div class="btn-row">
+                    <button class="btn primary" type="button">Ver disponibilidade</button>
+                    <button class="btn" type="button">Detalhes</button>
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <section class="section" aria-label="Como funciona">
+        <h2>Como funciona</h2>
+        <p class="section-subtitle">Rápido, simples, sem enrolação.</p>
+
+        <div class="cards">
+            <article class="card">
+                <h3>1) Você chama</h3>
+                <p>Manda seu interesse e diz o que você procura.</p>
+            </article>
+            <article class="card">
+                <h3>2) A gente te guia</h3>
+                <p>Te mostramos as opções certinhas (com valores e disponibilidade).</p>
+            </article>
+            <article class="card">
+                <h3>3) Você visita e decide</h3>
+                <p>Visita, curte o espaço e escolhe o seu.</p>
+            </article>
+        </div>
+    </section>
+
+    <footer id="contato">
+        <p><strong>Ficou com dúvida?</strong> Chama no Whats: <strong>(11) 94114-8374</strong></p>
+        <p>E-mail: <strong>email@dominio.com</strong></p>
+        <p style="margin-top:12px;">Valores e imagens são ilustrativos e podem mudar conforme disponibilidade.</p>
+    </footer>
+
+    <script>
+        // Botão CTA (exemplo simples)
+        document.querySelector(".cta")?.addEventListener("click", () => {
+            document.getElementById("contato")?.scrollIntoView({ behavior: "smooth" });
+        });
+    </script>
+</body>
+
+</html>

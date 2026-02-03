@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Aluguel de Studios Modernos</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;700&family=Inter:wght@400;600&display=swap"
+        rel="stylesheet" />
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Inter, sans-serif;
+            background: #f7f7f7;
+            color: #1a1a1a;
+            opacity: 0;
+            transition: opacity .7s ease;
+        }
+
+        body.loaded {
+            opacity: 1;
+        }
+
+        /* HERO */
+        .hero {
+            position: relative;
+            width: 100%;
+            height: 60vh;
+            min-height: 320px;
+            max-height: 100vh;
+            overflow: hidden;
+            background: black;
+        }
+
+        .video-container {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .video-container video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, .35);
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            height: 100%;
+            padding: 20px;
+            color: white;
+            max-width: 600px;
+        }
+
+        .hero-content h1 {
+            font-size: 28px;
+            margin-bottom: 8px;
+        }
+
+        .hero-content p {
+            font-size: 15px;
+            margin-bottom: 16px;
+        }
+
+        .cta {
+            background: linear-gradient(100deg, green 33%, white 33%, green 33%);
+            border: none;
+            padding: 12px;
+            border-radius: 4px;
+            color: white;
+            font-size: 15px;
+            cursor: pointer;
+        }
+
+        /* SECTIONS */
+        .steps,
+        .units,
+        .actions,
+        footer {
+            background: white;
+            padding: 20px;
+            margin-top: 12px;
+        }
+
+        .units .card {
+            margin-bottom: 18px;
+        }
+
+        .units img {
+            width: 100%;
+            border-radius: 6px;
+            margin-bottom: 8px;
+        }
+
+        .outline-btn {
+            width: 100%;
+            border: 1px solid #003b65;
+            padding: 10px;
+            border-radius: 4px;
+            background: white;
+            cursor: pointer;
+        }
+
+        .actions {
+            display: grid;
+            gap: 10px;
+        }
+
+        .btn-primary {
+            background: #003b65;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .btn-whatsapp {
+            background: #1aae64;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .btn-outline {
+            border: 1px solid #003b65;
+            background: white;
+            padding: 10px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        @media (max-width: 420px) {
+            .hero {
+                height: 100vh;
+            }
+
+            .hero-content h1 {
+                font-size: 30px;
+            }
+
+            .hero-content p {
+                font-size: 18px;
+                margin-top: -10px;
+            }
+
+            .units {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 24px;
+            }
+
+            .actions {
+                display: flex;
+                justify-content: center;
+                gap: 10px;
+            }
+
+            .actions button {
+                width: auto;
+            }
+        }
+
+
+        /* Desktop */
+        @media (min-width: 768px) {
+            .hero {
+                height: 100vh;
+            }
+
+            .hero-content h1 {
+                font-size: 42px;
+            }
+
+            .hero-content p {
+                font-size: 18px;
+            }
+
+            .units {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 24px;
+            }
+
+            .actions {
+                display: flex;
+                justify-content: center;
+                gap: 10px;
+            }
+
+            .actions button {
+                width: auto;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- HERO -->
+    <header class="hero">
+        <div class="video-container">
+            <video autoplay muted loop playsinline>
+                <source src="./assets/frame2-studio.mp4" type="video/mp4" />
+                Seu navegador não suporta vídeo.
+            </video>
+        </div>
+
+        <div class="hero-overlay"></div>
+
+        <div class="hero-content reveal">
+            <h1>Aluguel de Studios Modernos</h1>
+            <p>Studios novos em ótima localização, com e sem sacada.<br />
+                Agende uma visita e saiba mais!</p>
+            <button class="cta">AGENDAR VISITA</button>
+        </div>
+    </header>
+
+    <!-- STEPS -->
+    <section class="steps reveal">
+        <ol>
+            <li>Envie o formulário de interesse</li>
+            <li>Nossa equipe entrará em contato</li>
+            <li>Agende sua visita para conhecer o studio</li>
+        </ol>
+        <p class="sub-info">Studios com e sem sacada | Vagas limitadas | Valores variam conforme escolha</p>
+    </section>
+
+    <!-- UNIDADES -->
+    <section class="units reveal">
+        <h2>Unidades e Opções</h2>
+
+        <div class="card">
+            <img src="https://via.placeholder.com/400x200" alt="Studio" />
+            <h3>Studio 20m² com sacada</h3>
+            <p>A partir de <strong>R$ 2.100/mês</strong></p>
+            <button class="outline-btn">CONSULTAR DISPONIBILIDADE</button>
+        </div>
+
+        <div class="card">
+            <img src="https://via.placeholder.com/400x200" alt="Studio" />
+            <h3>Studio 20m² sem sacada</h3>
+            <p>A partir de <strong>R$ 1.900/mês</strong></p>
+            <button class="outline-btn">CONSULTAR DISPONIBILIDADE</button>
+        </div>
+    </section>
+
+    <!-- ACTIONS -->
+    <section class="actions reveal">
+        <button class="btn-primary">CADASTRAR INTERESSE</button>
+        <button class="btn-whatsapp">VIA WHATSAPP</button>
+        <button class="btn-outline">AGENDAR VISITA</button>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="reveal">
+        <p>Dúvidas? <strong>(11) 94114-8374</strong><br />
+            E-mail: <strong>email@dominio.com</strong></p>
+
+        <div class="links">
+            <a href="#">Instagram</a> •
+            <a href="#">Localização</a> •
+            <a href="#">WhatsApp</a> •
+            <a href="#">Política de Privacidade</a>
+        </div>
+
+        <p class="legal">Valores e imagens são meramente ilustrativos e estão sujeitos à alteração conforme
+            disponibilidade.</p>
+    </footer>
+
+    <script src="https://unpkg.com/scrollreveal"></script>
+
+    <script>
+        // Fade-in geral
+        window.addEventListener("load", () => {
+            document.body.classList.add("loaded");
+        });
+
+        // Scroll Reveal (com fallback: se ScrollReveal não carregar, não quebra a página)
+        if (window.ScrollReveal) {
+            ScrollReveal().reveal(".reveal", {
+                distance: "40px",
+                duration: 900,
+                easing: "ease-out",
+                interval: 150,
+                opacity: 0
+            });
+        }
+    </script>
+</body>
+
+</html>

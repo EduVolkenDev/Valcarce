@@ -1,0 +1,1047 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description"
+        content="Studios novos e bem localizados — escolha seu studio e agende uma visita rapidinho." />
+    <title>Studios Modernos</title>
+
+    <!-- Se você não usa essas fontes, pode remover para performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;700&family=Inter:wght@400;600;700&display=swap"
+        rel="stylesheet">
+
+    <style>
+        /* =========================
+       BASE / TOKENS
+       ========================= */
+        @font-face {
+            font-family: "Tenor Sans";
+            src: url("./assets/TenorSans-Regular.ttf") format("truetype");
+            font-weight: 400;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        :root {
+            --bg: #070A12;
+
+            --surface: rgba(255, 255, 255, .06);
+            --surface2: rgba(255, 255, 255, .10);
+            --stroke: rgba(255, 255, 255, .14);
+
+            --text: rgba(255, 255, 255, .92);
+            --muted: rgba(255, 255, 255, .72);
+
+            --accent: #6D5BFF;
+            --accent2: #20E3B2;
+            --accent3: #FF5FD7;
+
+            --shadow: 0 18px 60px rgba(0, 0, 0, .35);
+            --shadow2: 0 10px 30px rgba(0, 0, 0, .28);
+
+            --r-xl: 22px;
+            --r-lg: 18px;
+            --r-md: 14px;
+
+            --max: 1120px;
+
+            --heroOverlayOpacity: .55;
+            --media-fit: cover;
+
+            --bg: #070A12;
+            --surface: rgba(255, 255, 255, .06);
+
+            /* HERO ajustes */
+            --heroCardLift: clamp(14px, 50vh, 300px);
+            --heroH: min(100svh, 890px);
+            --heroMobile: min(75svh, 890px);
+
+        }
+
+        .vx-bot-fab {
+            border: 3px outset rgb(0, 0, 0);
+            cursor: pointer;
+            border-radius: 30px;
+            padding: 22px 24px;
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            box-shadow: 0 15px 10px rgba(0, 0, 0, 0.4);
+            background: linear-gradient(50deg, rgba(99, 234, 95, 0.91), rgba(150, 9, 214, 0.82), rgba(12, 229, 76, 0.84));
+            color: #fff;
+            max-width: min(300px, calc(100vw - 50px));
+            position: sticky;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        html,
+        body {
+            font-family: "Tenor Sans", system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+            width: 100%;
+            max-width: 100%;
+
+        }
+
+        body {
+            margin: 0;
+            color: var(--text);
+            background: var(--bg);
+            min-height: 100dvh;
+        }
+
+        input,
+        button,
+        textarea,
+        select {
+            font-family: inherit;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+            background: linear-gradient(50deg,
+                    rgba(100, 227, 102, 0.91),
+                    rgba(232, 30, 229, 0.66),
+                    rgba(12, 229, 14, 0.64));
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        a:hover {
+            opacity: .92;
+        }
+
+        img,
+        video,
+        svg,
+        canvas {
+            max-width: 100%;
+            display: block;
+        }
+
+        ::selection {
+            background: rgba(32, 227, 178, .22);
+            color: var(--text);
+        }
+
+        :focus-visible {
+            outline: 2px solid rgba(32, 227, 178, .75);
+            outline-offset: 3px;
+            border-radius: 10px;
+        }
+
+        /* =========================
+       LAYOUT
+       ========================= */
+        .section {
+            padding: clamp(32px, 6vw, 50px) clamp(16px, 5vw, 28px);
+            background: transparent;
+        }
+
+        .section>* {
+            max-width: var(--max);
+            margin-inline: auto;
+        }
+
+        h1,
+        h2,
+        h3 {
+            margin: 0 0 10px;
+            letter-spacing: -0.02em;
+        }
+
+        h2 {
+            font-size: clamp(30px, 3vw, 50px);
+            line-height: 1;
+            color: rgba(152, 227, 100, 0.91);
+            text-shadow: 0 4px 8px black;
+        }
+
+        .section-subtitle {
+            margin: 12px auto 0 !important;
+            color: rgb(254, 254, 254);
+            font-size: clamp(16px, 1.4vw, 20px);
+            line-height: 1.6;
+            text-shadow: 0 0 6px black;
+        }
+
+        .hero-video {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transform: scale(1.02);
+            filter: saturate(1.05) contrast(1.05);
+            z-index: 0;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(900px 560px at 20% 20%, rgba(109, 91, 255, .20), transparent 55%),
+                radial-gradient(900px 560px at 80% 30%, rgba(32, 227, 178, .14), transparent 58%),
+                linear-gradient(180deg, rgba(7, 10, 18, .25) 0%, rgba(7, 10, 18, .74) 70%, rgba(7, 10, 18, .92) 100%);
+            opacity: var(--heroOverlayOpacity);
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            width: min(860px, 100%);
+            text-align: center;
+            padding: clamp(14px, 2.6vw, 22px);
+            border-radius: 20px;
+            background: rgba(240, 248, 255, .22);
+            border: 1px solid rgba(255, 255, 255, .14);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            box-shadow: var(--shadow2);
+            grid-row: 2;
+            justify-self: center;
+            align-self: end;
+            margin-top: 0 !important;
+            margin: 30px;
+        }
+
+        .hero-content h1 {
+            font-size: clamp(34px, 5.2vw, 56px);
+            line-height: .95;
+            margin: 0 0 12px;
+            color: rgba(152, 227, 100, 0.91);
+            text-wrap: balance;
+            text-shadow: -3px 6px 7px black;
+        }
+
+        .hero-content p {
+            margin: 0 auto 22px;
+            max-width: 62ch;
+            color: rgba(255, 255, 255, .86);
+            font-size: clamp(15px, 1.6vw, 18px);
+            line-height: 1.6;
+        }
+
+        .cta {
+            appearance: none;
+            border: 2px outset black;
+            cursor: pointer;
+            padding: 14px 18px;
+            border-radius: 999px;
+            font-weight: 700;
+            letter-spacing: .06em;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.96);
+            background: linear-gradient(89deg, #8C32F97D, #E3C5208A, #8D3AF19C);
+            box-shadow: 0 18px 40px rgba(32, 227, 178, .20), 0 12px 28px rgba(109, 91, 255, .16);
+            transition: transform .16s ease, filter .16s ease;
+            text-shadow: 0 0 6px rgba(0, 0, 0, .7);
+        }
+
+        .cta:hover {
+            transform: translateY(-2px);
+            filter: brightness(1.02);
+        }
+
+        .cta:active {
+            transform: translateY(0) scale(.99);
+        }
+
+        /* =========================
+       CARDS (responsivo sem gambiarra)
+       ========================= */
+        .cards {
+            margin-top: 26px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 16px;
+            align-items: stretch;
+        }
+
+        .card {
+            min-width: 0;
+            padding: 0;
+            border-radius: var(--r-xl);
+            background: rgba(141, 48, 183, .38);
+            border: 1px solid rgba(255, 255, 255, .14);
+            box-shadow: var(--shadow2);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            transition: transform .18s ease, border-color .18s ease, background .18s ease;
+            overflow: hidden;
+            margin: 10px auto !important;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(32, 227, 178, .28);
+            background: rgba(255, 255, 255, .075);
+        }
+
+        .card-media {
+            border-radius: 22px 22px 0 0;
+            border: none;
+            overflow: hidden;
+            aspect-ratio: 13 / 11;
+            background: rgba(0, 0, 0, .18);
+        }
+
+        .card-media img {
+            width: 100%;
+            height: 100%;
+            object-fit: var(--media-fit);
+            object-position: center;
+            display: block;
+            padding: 20px;
+            border-top-left-radius: 22px;
+            border-top-right-radius: 22px;
+        }
+
+        .card-body {
+            padding: 18px;
+        }
+
+        .card h3 {
+            font-size: 20px;
+            margin: 10px 0 10px;
+        }
+
+        .card p {
+            margin: 0 0 10px;
+            color: rgba(255, 255, 255, .82);
+            line-height: 1.55;
+        }
+
+        .card p strong {
+            color: rgba(255, 255, 255, .94);
+        }
+
+        /* Botões: flex de verdade */
+        .btn-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 14px;
+        }
+
+        .btn,
+        .btn-last-row {
+            cursor: pointer;
+            border-radius: 999px;
+            padding: 14px 18px;
+            border: 2px outset rgba(48, 227, 101, 0.55);
+            font-weight: 700;
+            letter-spacing: .01em;
+            transition: transform .16s ease, background .16s ease, border-color .16s ease, filter .16s ease;
+            background: linear-gradient(30deg, #8C32F97D, #E3C5208A, #8D3AF19C);
+            color: rgba(255, 255, 255, .92);
+            box-shadow: 0 14px 28px rgba(102, 17, 186, 0.25);
+        }
+
+        .btn:hover,
+        .btn-last-row:hover {
+            transform: translateY(-1px);
+            background: rgba(255, 255, 255, .10);
+            border-color: rgba(255, 255, 255, .34);
+            filter: brightness(1.02);
+        }
+
+        .btn:active,
+        .btn-last-row:active {
+            transform: translateY(0) scale(.99);
+        }
+
+        .btn.primary {
+            background: linear-gradient(30deg, #8C32F97D, #E3C5208A, #8D3AF19C);
+            border: 2px outset rgba(48, 227, 101, 0.55);
+        }
+
+        .btn.primary:hover {
+            filter: brightness(1.05);
+            background: linear-gradient(30deg, #bd97ec7d, #eadb838a, #b78ee99c);
+        }
+
+        /* “Como funciona” - visual + sem quebrar responsivo */
+        .section[aria-label="Como funciona"] .card {
+            background: rgba(141, 48, 183, .55);
+            padding: 15px 15px;
+            margin: 30px 5px;
+            max-width: 100%;
+            display: inline-grid;
+            width: 350px;
+            height: auto;
+        }
+
+        .section[aria-label="Como funciona"] .card h3 {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: rgba(152, 227, 100, 0.91);
+        }
+
+        .section[aria-label="Como funciona"] .card h3::before {
+            content: "";
+            width: 15px;
+            height: 7px;
+            border-radius: 999px;
+            background: linear-gradient(95deg, #FFCF5F, #E32020);
+            box-shadow: 0 0 14px rgba(95, 240, 255, 0.35);
+            flex: 0 0 auto;
+        }
+
+        .btn-last {
+            margin-top: 14px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .section[aria-label="Como funciona"] .btn-last-row {
+            width: min(520px, 100%);
+            padding: 14px 18px;
+            font-size: 15px;
+            background: linear-gradient(89deg, #8C32F97D, #E3C5208A, #8D3AF19C);
+        }
+
+
+        /* =========================
+       MODAL (corrige o “display:none” que travava tudo)
+       ========================= */
+        .modal {
+            position: fixed;
+            inset: 0;
+            z-index: 999;
+            display: grid;
+            place-items: center;
+            padding: 18px;
+            background: rgba(0, 0, 0, .55);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            transition: opacity .18s ease, visibility .18s ease;
+        }
+
+        .modal[aria-hidden="true"] {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        .modal-panel {
+            width: min(560px, 100%);
+            border-radius: 18px;
+            padding: 18px;
+            background: rgba(20, 20, 32, .92);
+            border: 1px solid rgba(255, 255, 255, .14);
+            box-shadow: var(--shadow);
+            outline: none;
+        }
+
+        .modal-head {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            margin-bottom: 10px;
+        }
+
+        .modal-close {
+            cursor: pointer;
+            border: 0;
+            border-radius: 999px;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, .10);
+            color: rgba(255, 255, 255, .92);
+        }
+
+        .modal-desc {
+            color: rgba(255, 255, 255, .86);
+            line-height: 1.6;
+            margin: 10px 0 0;
+        }
+
+        .modal-price {
+            margin: 10px 0 0;
+            font-weight: 800;
+            color: rgba(152, 227, 100, 0.95);
+        }
+
+        /* =========================
+       FOOTER (HTML limpo + responsivo)
+       ========================= */
+        footer {
+            text-align: center;
+            font-size: 13px;
+            padding: 18px 14px;
+            background: rgba(0, 0, 0, .16);
+            border-top: 1px solid rgba(255, 255, 255, .10);
+        }
+
+        footer p {
+            margin: 8px auto;
+            max-width: var(--max);
+            color: rgba(255, 255, 255, .78);
+            line-height: 1.6;
+        }
+
+        footer strong {
+            color: rgba(255, 255, 255, .94);
+        }
+
+        .footer-link {
+            text-decoration: underline;
+            text-underline-offset: 2px;
+        }
+
+        /* =========================
+       BREAKPOINTS (só ajustes finos)
+       ========================= */
+        @media (max-width: 980px) {
+            .hero-content {
+                text-align: left;
+            }
+        }
+
+        @media (max-width: 980px) {
+            .hero {
+                height: var(--heroMobile) !important;
+                min-height: 70svh;
+            }
+
+            .hero-content {
+                text-align: center;
+            }
+
+            .hero-video {
+                height: 75%;
+            }
+
+            .hero-overlay {
+                height: 76%;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            html {
+                scroll-behavior: auto;
+            }
+
+            .cta,
+            .btn,
+            .btn-last-row,
+            .card {
+                transition: none;
+            }
+
+            .hero-video {
+                display: none;
+            }
+        }
+
+        /* 3) BTN-LAST: força ocupar a linha inteira do grid e não esticar */
+        .section[aria-label="Como funciona"] .cards {
+            align-items: start;
+            /* evita o item “esticar” na altura e ficar “gordo” */
+        }
+
+        .section[aria-label="Como funciona"] .btn-last {
+            grid-column: 1 / -1;
+            /* ocupa a linha inteira */
+            justify-content: center;
+            align-items: start;
+            height: auto;
+            margin-top: 14px;
+        }
+
+        .hero {
+            position: relative;
+            height: var(--heroH);
+            display: grid;
+            grid-template-rows: 1fr auto;
+            align-content: end;
+            padding: 10px;
+            overflow: hidden;
+        }
+
+
+        .hero-video,
+        .hero-overlay {
+            height: 100% !important;
+            /* cobre 100% do hero */
+        }
+    </style>
+</head>
+
+<body>
+
+    <section class="hero" aria-label="Hero">
+        <video class="hero-video" autoplay muted loop playsinline preload="metadata">
+            <source src="./assets/frame2-studio.mp4" type="video/mp4" />
+        </video>
+
+        <div class="hero-overlay" aria-hidden="true"></div>
+
+        <div class="hero-content">
+            <h1>SEU APÊ NO SEU RITMO.</h1>
+            <p>
+                Studios novos, bem localizados, com ou sem sacada — do tamanho da sua necessidade.
+                Bora visitar e ver qual combina com você?
+            </p>
+            <button class="cta" type="button" aria-label="Agendar visita e ir para contato">BORA AGENDAR</button>
+        </div>
+    </section>
+
+    <section class="section" id="opcoes" aria-label="Opções">
+        <h2>Escolhe o seu studio</h2>
+        <p class="section-subtitle">Sem drama: você vê as opções, tira dúvidas e agenda a visita rapidinho.</p>
+
+        <div class="cards" role="list">
+            <article class="card" role="listitem">
+                <div class="card-media">
+                    <img src="./assets/semsacadaofi.png" alt="Studio com sacada" loading="lazy" />
+                </div>
+
+                <div class="card-body">
+                    <h3>20m² com sacada</h3>
+                    <p>Um respiro a mais pro café, planta ou só pra curtir o fim do dia.</p>
+                    <p><strong>A partir de R$ 2.100/mês</strong></p>
+
+                    <div class="btn-row">
+                        <button class="btn primary" type="button" data-action="whats"
+                            data-msg="Oi! Tenho interesse no studio de 20m² com sacada. Podemos ver disponibilidade e agendar uma visita?">
+                            Ver disponibilidade
+                        </button>
+                        <button class="btn" type="button" data-action="details" data-title="20m² com sacada"
+                            data-desc="Um respiro a mais pro café, planta ou só pra curtir o fim do dia."
+                            data-price="A partir de R$ 2.100/mês">
+                            Detalhes
+                        </button>
+                    </div>
+                </div>
+            </article>
+
+            <article class="card" role="listitem">
+                <div class="card-media">
+                    <img src="./assets/semsacadaofi.png" alt="Studio sem sacada" loading="lazy" />
+                </div>
+
+                <div class="card-body">
+                    <h3>20m² sem sacada</h3>
+                    <p>Compacto, prático e direto ao ponto — perfeito pra rotina corrida.</p>
+                    <p><strong>A partir de R$ 1.900/mês</strong></p>
+
+                    <div class="btn-row">
+                        <button class="btn primary" type="button" data-action="whats"
+                            data-msg="Oi! Tenho interesse no studio de 20m² sem sacada. Podemos ver disponibilidade e agendar uma visita?">
+                            Ver disponibilidade
+                        </button>
+                        <button class="btn" type="button" data-action="details" data-title="20m² sem sacada"
+                            data-desc="Compacto, prático e direto ao ponto — perfeito pra rotina corrida."
+                            data-price="A partir de R$ 1.900/mês">
+                            Detalhes
+                        </button>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <section class="section" aria-label="Como funciona">
+        <h2>Como funciona</h2>
+        <p class="section-subtitle">Rápido, simples, sem enrolação.</p>
+
+        <div class="last-cards" role="list">
+            <article class="card" role="listitem">
+                <h3>1) Você chama</h3>
+                <p>Manda seu interesse e diz o que você procura.</p>
+            </article>
+            <article class="card" role="listitem">
+                <h3>2) A gente te guia</h3>
+                <p>Te mostramos as opções certinhas (com valores e disponibilidade).</p>
+            </article>
+            <article class="card" role="listitem">
+                <h3>3) Você visita e decide</h3>
+                <p>Visita, curte o espaço e escolhe o seu.</p>
+            </article>
+        </div>
+        <div class="btn-last">
+            <button class="btn-last-row" type="button" data-action="whats"
+                data-msg="Oi! Quero ver as opções disponíveis e agendar uma visita.">
+                Ver disponibilidade
+            </button>
+        </div>
+    </section>
+
+    <footer id="contato" aria-label="Contato">
+        <p><strong>Ficou com dúvida?</strong> Fale com o ChatBot (ele te guia no caminho certo).</p>
+        <p>Se não resolver por aqui, estamos disponíveis no WhatsApp ou por e-mail:</p>
+        <p>WhatsApp: <a class="footer-link" href="https://wa.me/5511941148374" target="_blank" rel="noopener">(11)
+                94114-8374</a></p>
+        <p>E-mail: <a class="footer-link" href="mailto:email@dominio.com">email@dominio.com</a></p>
+        <p style="margin-top:12px;">Valores e imagens são ilustrativos e podem mudar conforme disponibilidade.</p>
+    </footer>
+
+    <!-- Modal (Detalhes) -->
+    <div class="modal" id="detailsModal" aria-hidden="true">
+        <div class="modal-panel" role="dialog" aria-modal="true" aria-label="Detalhes do studio" tabindex="-1">
+            <div class="modal-head">
+                <h3 id="modalTitle">Detalhes</h3>
+                <button class="modal-close" type="button" aria-label="Fechar" data-close-modal>✕</button>
+            </div>
+            <p id="modalDesc" class="modal-desc"></p>
+            <p id="modalPrice" class="modal-price"></p>
+            <div class="btn-row" style="margin-top:14px;">
+                <button class="btn primary" type="button" id="modalWhatsBtn">Quero agendar</button>
+                <button class="btn" type="button" data-close-modal>Fechar</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        (() => {
+            // ===== CTA: rolar até contato =====
+            document.querySelector(".cta")?.addEventListener("click", () => {
+                document.getElementById("contato")?.scrollIntoView({ behavior: "smooth" });
+            });
+
+            // ===== Mobile Menu (protege contra elementos inexistentes) =====
+            const btn = document.getElementById("menuBtn");
+            const menu = document.getElementById("mobileMenu");
+
+            const openMenu = () => {
+                if (!btn || !menu) return;
+                menu.setAttribute("aria-hidden", "false");
+                btn.setAttribute("aria-expanded", "true");
+                btn.setAttribute("aria-label", "Fechar menu");
+            };
+
+            const closeMenu = () => {
+                if (!btn || !menu) return;
+                menu.setAttribute("aria-hidden", "true");
+                btn.setAttribute("aria-expanded", "false");
+                btn.setAttribute("aria-label", "Abrir menu");
+            };
+
+            btn?.addEventListener("click", () => {
+                const isOpen = menu?.getAttribute("aria-hidden") === "false";
+                isOpen ? closeMenu() : openMenu();
+            });
+
+            menu?.addEventListener("click", (e) => {
+                const target = e.target;
+                const clickedLink = target?.matches?.("[data-close]");
+                const clickedBackdrop = target === menu;
+                if (clickedBackdrop || clickedLink) closeMenu();
+            });
+
+            // ===== WhatsApp action =====
+            const WHATS_NUMBER = "5511941148374";
+            const openWhats = (msg) => {
+                const url = "https://wa.me/" + WHATS_NUMBER + "?text=" + encodeURIComponent(msg);
+                window.open(url, "_blank", "noopener");
+            };
+
+            // ===== Modal (Detalhes) =====
+            const modal = document.getElementById("detailsModal");
+            const modalTitle = document.getElementById("modalTitle");
+            const modalDesc = document.getElementById("modalDesc");
+            const modalPrice = document.getElementById("modalPrice");
+            const modalWhatsBtn = document.getElementById("modalWhatsBtn");
+
+            let lastFocus = null;
+            let modalMsg = "Oi! Quero agendar uma visita. 😊";
+
+            const openModal = ({ title, desc, price }) => {
+                if (!modal) return;
+                lastFocus = document.activeElement;
+
+                modalTitle.textContent = title || "Detalhes";
+                modalDesc.textContent = desc || "";
+                modalPrice.textContent = price || "";
+
+                modalMsg = `Oi! Tenho interesse no studio "${title}". Podemos agendar uma visita?`;
+
+                modal.setAttribute("aria-hidden", "false");
+                modal.querySelector(".modal-panel")?.focus?.();
+            };
+
+            const closeModal = () => {
+                if (!modal) return;
+                modal.setAttribute("aria-hidden", "true");
+                lastFocus?.focus?.();
+            };
+
+            document.addEventListener("keydown", (e) => {
+                if (e.key === "Escape") {
+                    closeMenu();
+                    closeModal();
+                }
+            });
+
+            document.querySelectorAll("[data-action='whats']").forEach((el) => {
+                el.addEventListener("click", () => {
+                    const msg = el.getAttribute("data-msg") || "Oi! Quero agendar uma visita. 😊";
+                    openWhats(msg);
+                });
+            });
+
+            document.querySelectorAll("[data-action='details']").forEach((el) => {
+                el.addEventListener("click", () => {
+                    openModal({
+                        title: el.getAttribute("data-title"),
+                        desc: el.getAttribute("data-desc"),
+                        price: el.getAttribute("data-price"),
+                    });
+                });
+            });
+
+            modalWhatsBtn?.addEventListener("click", () => openWhats(modalMsg));
+
+            modal?.addEventListener("click", (e) => {
+                const target = e.target;
+                const clickedBackdrop = target === modal;
+                const clickedClose = target?.matches?.("[data-close-modal]");
+                if (clickedBackdrop || clickedClose) closeModal();
+            });
+        })();
+    </script>
+
+    <script>
+        window.addEventListener("load", () => {
+            document.documentElement.classList.add("loaded");
+        });
+    </script>
+
+    <script>
+        window.VOLYNX_BOT_CONFIG = {
+            botName: "Oi, eu sou a Sandra",
+            botRole: "Bot da imobiliária",
+            brandName: "VOLYNX",
+            studioName: "Studios na Freguesia do Ó",
+            studioSize: "20m²",
+            neighborhood: "Freguesia do Ó",
+            metroHighlight: "Em frente ao metrô (Freguesia do Ó) — linha das universidades",
+            hasBalconyOptions: true,
+            parking: { enabled: true, price: "R$ X/mês", limit: 40, note: "vagas limitadas" },
+            commonAreas: [
+                "Academia",
+                "Lavanderia OMO",
+                "Coworking",
+                "Sala de jogos",
+                "Lounge",
+                "Mini mercado",
+                "Bicicletário"
+            ],
+            laundry: { model: "pay-per-use", how: "app/sistema do prédio", hours: "conforme regulamento" },
+            visits: { enabled: true, types: ["Presencial", "Virtual"], hours: "conforme agenda" },
+            contract: { minTerm: "conforme proposta", readjust: "conforme contrato", earlyExit: "multa proporcional (conforme contrato)" },
+            docs: { note: "varia por perfil (CLT/autônomo/estudante/PJ)" },
+            utilities: { model: "depende da unidade/condomínio (individualizado ou rateio)" },
+            internet: { model: "infra pronta; morador contrata (varia por cobertura)" },
+            security: { model: "controle de acesso e regras do condomínio" },
+            delivery: { model: "recebimento conforme portaria/gestão do prédio" },
+            pets: { allowed: "conforme regulamento do condomínio" },
+            tone: { shortAnswers: true }
+        };
+    </script>
+
+    <script src="./assets/bot_kb.js?v=3"></script>
+    <script src="./assets/bot_engine.js?v=3"></script>
+    <script>
+        (function () {
+            // Cria container do bot
+            var botLauncher = document.createElement('div');
+            botLauncher.id = 'vx-bot-launcher';
+            Object.assign(botLauncher.style, {
+                position: 'fixed',
+                bottom: '14px',
+                right: '14px',
+                zIndex: '999999 !important',
+                fontFamily: 'ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Arial',
+                pointerEvents: 'auto',
+            });
+
+            // Botão principal
+            var botFab = document.createElement('button');
+            botFab.id = 'vx-bot-fab';
+            botFab.innerText = '💬 Chat';
+            Object.assign(botFab.style, {
+                border: 'none',
+                borderRadius: '50px',
+                padding: '16px 20px',
+                background: 'linear-gradient(50deg, #63ea5f, #9609d6, #0ce54c)',
+                color: '#fff',
+                cursor: 'pointer',
+                boxShadow: '0 8px 12px rgba(0,0,0,0.4)',
+                fontWeight: 'bold',
+            });
+
+            // Painel do bot
+            var botPanel = document.createElement('div');
+            botPanel.id = 'vx-bot-panel';
+            Object.assign(botPanel.style, {
+                display: 'none',
+                position: 'fixed',
+                bottom: '70px',
+                right: '14px',
+                width: '320px',
+                maxHeight: '60vh',
+                background: '#0b0f19',
+                borderRadius: '14px',
+                boxShadow: '0 12px 40px rgba(0,0,0,0.5)',
+                overflow: 'hidden',
+                display: 'flex',
+                flexDirection: 'column',
+                zIndex: '999999 !important',
+            });
+
+            // Cabeçalho
+            var header = document.createElement('div');
+            header.id = 'vx-bot-header';
+            header.innerText = 'Bot da Imobiliária';
+            Object.assign(header.style, {
+                padding: '12px',
+                borderBottom: '1px solid rgba(255,255,255,.1)',
+                color: '#fff',
+                fontSize: '14px',
+            });
+
+            // Corpo de mensagens
+            var bodyDiv = document.createElement('div');
+            bodyDiv.id = 'vx-bot-body';
+            Object.assign(bodyDiv.style, {
+                padding: '12px',
+                flex: '1',
+                overflowY: 'auto',
+                color: '#fff',
+                fontSize: '13px',
+            });
+
+            // Campo de entrada
+            var inputContainer = document.createElement('div');
+            inputContainer.id = 'vx-bot-input';
+            Object.assign(inputContainer.style, {
+                display: 'flex',
+                borderTop: '1px solid rgba(255,255,255,.1)',
+                padding: '8px',
+                background: '#0b0f19',
+            });
+
+            var field = document.createElement('input');
+            field.type = 'text';
+            field.id = 'vx-bot-field';
+            field.placeholder = 'Escreva aqui...';
+            Object.assign(field.style, {
+                flex: '1',
+                padding: '8px 10px',
+                borderRadius: '8px',
+                border: '1px solid rgba(255,255,255,.2)',
+                background: 'rgba(255,255,255,.05)',
+                color: '#fff',
+                fontSize: '13px',
+            });
+
+            var sendBtn = document.createElement('button');
+            sendBtn.id = 'vx-bot-send';
+            sendBtn.innerText = 'Enviar';
+            Object.assign(sendBtn.style, {
+                marginLeft: '6px',
+                padding: '8px 12px',
+                borderRadius: '8px',
+                border: 'none',
+                background: '#fff',
+                color: '#0b0f19',
+                fontWeight: 'bold',
+                cursor: 'pointer',
+            });
+
+            inputContainer.appendChild(field);
+            inputContainer.appendChild(sendBtn);
+
+            botPanel.appendChild(header);
+            botPanel.appendChild(bodyDiv);
+            botPanel.appendChild(inputContainer);
+
+            botLauncher.appendChild(botFab);
+            botLauncher.appendChild(botPanel);
+
+            // Insere diretamente no body, ignorando ancestrais
+            document.body.appendChild(botLauncher);
+
+            // Toggle do painel
+            botFab.addEventListener('click', function () {
+                if (botPanel.style.display === 'none') {
+                    botPanel.style.display = 'flex';
+                } else {
+                    botPanel.style.display = 'none';
+                }
+            });
+
+            // Exemplo: adicionar mensagem de teste
+            function botSay(msg) {
+                var m = document.createElement('div');
+                m.innerText = msg;
+                m.style.background = 'rgba(255,255,255,0.06)';
+                m.style.color = '#fff';
+                m.style.padding = '8px 10px';
+                m.style.borderRadius = '8px';
+                m.style.marginBottom = '6px';
+                bodyDiv.appendChild(m);
+                bodyDiv.scrollTop = bodyDiv.scrollHeight;
+            }
+
+            // Teste inicial
+            botSay('Oi! Eu sou o Bot da Imobiliária e apareço mesmo com overflow/transform!');
+
+        })();
+    </script>
+    <script>
+        (function () {
+            const bot = document.getElementById('vx-bot-launcher');
+            if (!bot) return;
+
+            // Função para “liberar” o botão dos ancestrais problemáticos
+            function fixButton(botEl) {
+                let parent = botEl.parentElement;
+                while (parent && parent.tagName !== 'BODY') {
+                    const style = getComputedStyle(parent);
+                    // Se ancestor tem overflow ou transform que prende o fixed
+                    if (style.overflow !== 'visible' || style.transform !== 'none') {
+                        // Adiciona uma classe temporária para o botão ignorar
+                        botEl.style.position = 'fixed';
+                        botEl.style.bottom = '14px';
+                        botEl.style.right = '14px';
+                        botEl.style.zIndex = '999999';
+                    }
+                    parent = parent.parentElement;
+                }
+            }
+
+            // Executa assim que a página carrega
+            window.addEventListener('load', () => fixButton(bot));
+
+            // Também executa se a página mudar tamanho
+            window.addEventListener('resize', () => fixButton(bot));
+        })();
+    </script>
+
+</body>
+
+</html>

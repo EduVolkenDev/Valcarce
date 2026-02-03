@@ -1,0 +1,253 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    color: #111;
+    background: #fff;
+    animation: fadeIn 1.3s ease-in forwards;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(6px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+header.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 24px 48px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+}
+
+.navbar nav a {
+    margin-left: 24px;
+    text-decoration: none;
+    color: #111;
+}
+
+.logo {
+    font-weight: 500;
+}
+
+.hero {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.hero-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.25);
+}
+
+.hero-content {
+    position: absolute;
+    bottom: 40px;
+    left: 20px;
+    color: white;
+    max-width: 500px;
+    font-size: 20px;
+    line-break: auto;
+    width: 360px;
+}
+
+.hero-content h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 52px;
+    margin-bottom: 12px;
+}
+
+.cta {
+    margin-top: 20px;
+    padding: 12px 24px;
+    color: #ffffff;
+    background: linear-gradient(160deg, #00800094 25%, #ffffffab 50%, #00800099 75%);
+    cursor: pointer;
+}
+
+.section {
+    padding: 80px;
+    text-align: center;
+}
+
+.section h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 42px;
+}
+
+.section-subtitle {
+    margin-top: 8px;
+    font-size: 18px;
+    color: #666;
+}
+
+.cards {
+    display: flex;
+    gap: 24px;
+    margin-top: 40px;
+    justify-content: center;
+}
+
+.card {
+    width: 280px;
+    text-align: left;
+}
+
+.card img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+}
+
+.card h3 {
+    margin-top: 12px;
+    font-size: 20px;
+}
+
+footer {
+    padding: 40px;
+    text-align: center;
+    font-size: 14px;
+}
+
+@media (min-width: 350px) and (max-width: 490px) {
+    header.navbar {
+        display: none;
+
+        .hero {
+            height: 100vh;
+        }
+
+        .hero-content {
+            position: absolute;
+            bottom: 50px;
+            left: 20px;
+            color: white;
+            max-width: 500px;
+            width: 350px;
+        }
+
+        .hero-content h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 45px;
+            margin-bottom: 12px;
+            width: 300px;
+        }
+
+        .hero-content p {
+            font-size: 20px;
+            line-break: auto;
+            width: 360px;
+        }
+
+        .units {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+        }
+
+        .actions {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .actions button {
+            width: auto;
+        }
+
+        .cta {
+            margin-top: 35px;
+            padding: 15px 30px;
+            color: #FFF;
+            cursor: pointer;
+            background: linear-gradient(160deg, #00800094 25%, #ffffffab 50%, #00800099 75%);
+            border-radius: 15px;
+            box-shadow: 0 0 25px inset white, 0 0 20px inset #2cff0e;
+            font-size: 30px;
+            width: auto;
+        }
+    }
+
+
+    /* Desktop */
+    @media (min-width: 768px) {
+        .hero {
+            height: 100vh;
+        }
+
+        .hero-content h1 {
+            font-size: 80px;
+            width: 500px;
+            ;
+        }
+
+        .hero-content {
+            position: absolute;
+            bottom: 40px;
+            left: 30px;
+            color: white;
+            max-width: 700px;
+            width: 450px;
+            height: 470px;
+            display: inline-grid;
+        }
+    }
+
+    .hero-content p {
+        font-size: 20px;
+        line-break: auto;
+        width: 360px;
+    }
+
+    .cta {
+        margin-top: 35px;
+        padding: 15px;
+        color: #FFF;
+        cursor: pointer;
+        background: linear-gradient(160deg, #00800094 25%, #ffffffab 50%, #00800099 75%);
+        border-radius: 15px;
+        box-shadow: 0 0 25px inset white, 0 0 20px inset #2cff0e;
+        font-size: 30px;
+    }
+
+    .units {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 24px;
+    }
+
+    .actions {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+    }
+
+    .actions button {
+        width: auto;
+    }
+}
