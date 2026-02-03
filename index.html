@@ -481,29 +481,24 @@
         /* painel */
         .modal-panel,
         .sub-modal-panel {
-            inset: 0;
-            display: grid;
-            place-items: center;
-            padding: 30px;
-            background: rgba(0, 0, 0, 0.31);
-            -webkit-backdrop-filter: blur(8px);
-            width: 30%;
-            height: auto;
-            max-width: 100%;
-            border-radius: 15px;
+            background: rgba(20, 20, 32, 0.98);
+            border-radius: 18px;
+            padding: 24px;
+            max-width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
             text-align: center;
-            border: 4px outset #120808;
+            border: 1px solid rgba(255, 255, 255, .10);
         }
 
         .sub-modal {
             position: fixed;
             inset: 0;
             z-index: 10000;
-            /* acima do modal principal */
             display: grid;
             place-items: center;
-            padding: 20px;
-            background: rgba(0, 0, 0, 0.75);
+            padding: 16px;
+            background: rgba(0, 0, 0, .75);
             backdrop-filter: blur(10px);
             opacity: 0;
             visibility: hidden;
@@ -516,37 +511,45 @@
         }
 
         .sub-modal-panel {
-            max-width: 100%;
-            max-height: 100%;
-            overflow-y: auto;
-            background: rgba(20, 20, 32, 0.95);
+            width: 100%;
+            max-width: 480px;
+            background: rgba(20, 20, 32, 0.98);
             border-radius: 18px;
-            padding: 0px;
+            padding: 20px;
             position: relative;
         }
 
         .sub-modal-images {
             display: grid;
-            gap: 40px;
-            justify-items: center;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-top: 16px;
+        }
+
+        .sub-modal-images>div {
+            display: flex;
+            flex-direction: column;
             align-items: center;
-            grid-template-columns: 4fr 4fr;
-            width: auto;
         }
 
         .sub-modal-images img {
-            width: 200px;
-            height: auto;
+            width: 100%;
+            max-width: 140px;
+            height: 100px;
             object-fit: cover;
-            border-radius: 14px;
+            border-radius: 12px;
             border: 1px solid rgba(255, 255, 255, .14);
-            box-shadow: 0 6px 18px rgba(0, 0, 0, .35);
-            transition: transform .25s ease, box-shadow .25s ease;
+            transition: transform .2s ease;
         }
 
         .sub-modal-images img:hover {
-            transform: scale(1.1);
-            box-shadow: 0 12px 28px rgba(32, 227, 178, .6);
+            transform: scale(1.05);
+        }
+
+        .sub-modal-images span {
+            margin-top: 6px;
+            font-size: 12px;
+            color: rgba(255, 255, 255, .85);
         }
 
 
